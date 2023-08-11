@@ -18,6 +18,8 @@ package object request {
 
   case class AmqpQueueExchange(name: Expression[String], durable: Boolean = false) extends AmqpExchange
 
+  case class AmqpFanoutExchange(name: Expression[String], durable: Boolean = false) extends AmqpExchange
+
   sealed trait AmqpMessage {
     private[amqp] def amqpProtocolMessage(session: Session): Validation[AmqpProtocolMessage]
   }
