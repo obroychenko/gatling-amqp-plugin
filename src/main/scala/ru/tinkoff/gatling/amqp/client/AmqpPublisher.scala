@@ -24,6 +24,11 @@ class AmqpPublisher(destination: AmqpExchange, components: AmqpComponents) exten
           exName <- name(session)
           exKey  <- routingKey(session)
         } withChannel(channel => channel.basicPublish(exName, exKey, message.amqpProperties, message.payload))
+
+      case AmqpFanoutExchange(name, _) =>
+        for {
+          exName <- name(session)
+        } withChannel(channel => channel.basicPublish(exName, "", message.amqpProperties, message.payload))
     }
   }
 

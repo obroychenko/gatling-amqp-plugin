@@ -15,5 +15,7 @@ case class PublishDslBuilderExchange(
 
   def queueExchange(name: Expression[String]): PublishDslBuilderMessage = destination(AmqpQueueExchange(name))
 
+  def fanoutExchange(name: Expression[String]): PublishDslBuilderMessage = destination(AmqpFanoutExchange(name))
+
   protected def destination(dest: AmqpExchange) = PublishDslBuilderMessage(requestName, dest, configuration)
 }
